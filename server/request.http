@@ -1,0 +1,27 @@
+GET http://localhost:8000/home
+
+###
+
+POST  http://localhost:8000/home
+Content-Type: application/json
+
+{
+    "title":"khoá học của tôi4",
+    "description":"Chi tiết khoá học cuủa tôi",
+    "imgUrl":"http://st.imageinstant.net/data/comics/126/vuong-gia-khac-the.jpg"
+}
+###
+DELETE  http://localhost:8000/home/delete/6189d6b37b3ace22a00caedd
+
+
+
+###
+GET  http://localhost:8000/home/find/6189df53cedc015b4f3607b6
+
+###
+PATCH  http://localhost:8000/home/update/618a2cda8a8b49e1706c6adf
+
+{
+    "title":"sua1",
+    "description":"sua2"
+}
