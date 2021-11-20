@@ -1,5 +1,5 @@
 const Post = require("../models/Post")
-const ejs=require("ejs");
+// const ejs=require("ejs");
 
 class postController{
     async getpost(req,res) {
@@ -31,7 +31,7 @@ class postController{
     
     async deletePost(req,res) {
         try {
-         const posts =  await Post.deleteOne({ _id: req.params._id })
+         const posts =  await Post.deleteOne({ _id: req.params.id })
          res.json({success:true,posts})
          console.log("xoá thành công")
 
@@ -41,21 +41,21 @@ class postController{
         }
     }
 
-    async findPost(req,res) {
-        try {
-         const posts =  await Post.findById({_id: req.params._id })
-         res.json({success:true,posts})
-         console.log("tìm thành công")
+    // async findPost(req,res) {
+    //     try {
+    //      const posts =  await Post.findById({_id: req.params.id })
+    //      res.json({success:true,posts})
+    //      console.log("tìm thành công")
 
-        } catch (error) {
-            console.log("Error model : " + error)
-            res.status(500).json({success:fail,message:"Lỗi server"})
-        }
-    }
+    //     } catch (error) {
+    //         console.log("Error model : " + error)
+    //         res.status(500).json({success:fail,message:"Lỗi server"})
+    //     }
+    // }
 
     async updatePost(req,res) {
         try {
-            const posts =  await Post.findById({_id: req.params._id})
+            const posts =  await Post.findById({_id: req.params.id})
             const {title,description,imgUrl}=req.body;
             const newPost= new Post({
                 title,

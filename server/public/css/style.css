@@ -1,0 +1,8 @@
+.nav-link-hover{
+    color:white;
+    opacity: 0.6; 
+}
+.nav-link-hover:hover{
+    color:white;
+    opacity: 0.8;
+}

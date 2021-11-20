@@ -6,10 +6,10 @@ router.get('/',PostController.getpost)
 
 router.post('/',PostController.createPost)
 
-router.delete('/:_id',PostController.deletePost)
+router.delete('/:id',PostController.deletePost)
 
-router.get('/:_id',PostController.findPost)
+// router.get('/:id',PostController.findPost)
 
-router.patch('/:_id',PostController.updatePost)
+router.patch('/:id',PostController.updatePost)
 
 module.exports = router

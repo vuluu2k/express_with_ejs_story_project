@@ -2,7 +2,7 @@ GET http://localhost:8000/home
 
 ###
 
-POST  http://localhost:8000/home
+POST  http://localhost:8000
 Content-Type: application/json
 
 {
@@ -24,4 +24,13 @@ PATCH  http://localhost:8000/home/update/618a2cda8a8b49e1706c6adf
 {
     "title":"sua1",
     "description":"sua2"
+}
+###
+
+POST http://localhost:8000/account/register
+Content-Type: application/json
+
+{
+    "username":"Admin2",
+    "password":"123456"
 }

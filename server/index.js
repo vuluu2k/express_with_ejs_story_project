@@ -17,7 +17,9 @@ async function connect(){
 }
 
 connect()
+app.use(express.static('public'));
 app.use(express.json(limit="50mb"))
+app.use(express.urlencoded({extended:true}))
 app.set('view engine', 'ejs')
 route(app)
 
