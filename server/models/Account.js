@@ -7,6 +7,7 @@ const AccountSchema=new Schema({
             unique: true
         },
         password:String,
+        level:{type:String,enum:["user","admin","employ"]}
     },
     {
         timestamps:true

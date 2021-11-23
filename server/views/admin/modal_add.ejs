@@ -1,0 +1,26 @@
+<div class="modal fade" id="modal_add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Thêm truyện mới</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="post">
+            <div class="modal-body">
+              <label for="nameStory">Tên truện</label>
+              <input type="text" name="nameStory" id="nameStory" class="form-control" placeholder="Tên truyện ..."><br>
+              <label for="desStory">Mô tả</label>
+              <textarea name="desStory" id="desStory" class="form-control" placeholder="Nội dung ..."></textarea><br>
+              <label for="imgStory">Tên truện</label>
+              <input type="url" name="imgStory" id="imgStory" class="form-control" placeholder="Link Ảnh ...">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
+              <button type="submit" class="btn btn-primary">Thêm</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
