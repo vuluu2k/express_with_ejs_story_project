@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const path = require('path');
 const port = 8000
+const methodOverride = require('method-override');
 const route = require("./routers/index") 
 const mongoose = require('mongoose');
 
@@ -20,6 +21,7 @@ connect()
 app.use(express.static('public'));
 app.use(express.json(limit="50mb"))
 app.use(express.urlencoded({extended:true}))
+app.use(methodOverride('_method'));
 app.set('view engine', 'ejs')
 route(app)
 

@@ -70,13 +70,25 @@
                 </div>
                 <div class="content ml-5 mr-5">
                   <div class="row">
-                    <% posts.forEach(function(post){ %>
+                    <% let idDelete 
+                    posts.forEach(function(post){ %>
                         <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                             <div class="card border-primary" style="width: 100%; margin-top:10px" >
                                 <div class="d-flex">
                                     <img src="<%=post.imgUrl%>" class="card-img-top" alt="..." style="width: 100px;"> 
                                     <div class="card-body">
                                         <h5 class="card-title"><%= post.title %></h5>
+                                        <button class="btn btn-primary btn-sm">
+                                          <i class="far fa-eye"></i>
+                                        </button>
+                                        <button data-toggle="modal" data-target="#modal_edit" data-id="<%=post._id%>" data-post="<%=post%>" class="btn btn-info btn-sm">
+                                          <i class="fas fa-pen"></i>
+                                        </button>
+                                        <!-- Xóa -->
+                                        <button data-toggle="modal" data-target="#modal_confirm" class="btn btn-danger btn-sm" data-id="<%=post._id%>">
+                                          <i class="fas fa-trash"></i>
+                                        </button>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -93,10 +105,48 @@
           </div>
         </div>
         <%- include ('./modal_add'); %>
+        <%- include ('./modal_confirm'); %>
+        <%- include ('./modal_edit'); %>
+        <form method="POST" name="delete-story-form"></form>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+      var idDeleteStory
+      var post
+      var idEditStory
+      var btnDeleteStory=document.getElementById("btnDeleteStory")
+      var btnEditStory=document.getElementById("btnEditStory")
+      var delForm=document.forms['delete-story-form']
+      var editForm=document.forms['edit-story-form']
+      
+      $('#modal_confirm').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) 
+          idDeleteStory= button.data('id')
+          // console.log(idDeleteStory)
+      })
+      $('#modal_edit').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) 
+          post = button.data('post').split(',')
+          idEditStory=button.data('id')
+          console.log(post)
+          var modal = $(this)
+          // console.log(idDeleteStory)
+          modal.find('.nameStory').val(post[1].split(':')[1].slice(2,-1))
+          modal.find('.desStory').val(post[2].split(':')[1].slice(2,-1))
+          modal.find('.imgStory').val((post[3].split(':')[1]+":"+post[3].split(':')[2]).slice(2,-1))
+      })
+      btnDeleteStory.onclick =function () {
+        delForm.action=`/admin/story/${idDeleteStory}?_method=DELETE`
+        delForm.submit()
+      }
+      btnEditStory.onclick =function () {
+        editForm.action=`/admin/story/${idEditStory}?_method=PUT`
+        editForm.submit()
+      }
+      var imgStory=$('#imgStory')
+    </script>
   </body>
 </html>

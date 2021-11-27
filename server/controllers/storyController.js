@@ -37,7 +37,7 @@ class postController{
     async deleteStory(req,res) {
         try {
          const posts =  await Post.deleteOne({ _id: req.params.id })
-         res.json({success:true,posts})
+         res.redirect('back')
          console.log("xoá thành công")
 
         } catch (error) {
@@ -60,18 +60,17 @@ class postController{
 
     async updateStory(req,res) {
         try {
-            const posts =  await Post.findById({_id: req.params.id})
-            const {title,description,imgUrl}=req.body;
-            const newPost= new Post({
-                title,
-                description,
-                imgUrl
-            })
-            await newPost.save()
-         
-         res.json({success:true,posts:newPost})
-         console.log("sửa thành công")
-
+            const data=req.body;
+            let updateStory= {
+                title:data.nameStory,
+                description:data.desStory,
+                imgUrl:data.imgStory
+            }
+            const updateStoryCondition={_id:req.params.id}
+            updateStory=await Post.findOneAndUpdate(updateStoryCondition,updateStory,{new:true})
+            if(!updateStory)
+                return res.render('error',{message:"Cập nhật thất bại"})
+            return res.redirect('back')
         } catch (error) {
             console.log("Error model : " + error)
             res.status(500).json({success:fail,message:"Lỗi server"})
